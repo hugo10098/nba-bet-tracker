@@ -18,6 +18,9 @@ jobs:
       - name: Install dependencies
         run: pip install requests gspread pandas google-auth oauth2client
 
+      - name: Validate Google Sheets Credentials JSON
+        run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" | python -m json.tool
+
       - name: Create credentials file
         run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" > credentials.json
 
