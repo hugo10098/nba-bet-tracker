@@ -1,0 +1,26 @@
+name: NBA Stats Update
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-sheet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests gspread pandas google-auth oauth2client
+
+      - name: Create credentials file
+        run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" > credentials.json
+
+      - name: Run script
+        run: python nba_tracker.py
