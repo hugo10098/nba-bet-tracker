@@ -19,7 +19,13 @@ jobs:
         run: pip install requests gspread pandas google-auth oauth2client
 
       - name: Validate Google Sheets Credentials JSON
-        run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" | python -m json.tool
+        run: |
+          if [ ! -z "${{ secrets.GOOGLE_SHEETS_CREDS }}" ]; then
+            echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" | python -m json.tool
+          else
+            echo "GOOGLE_SHEETS_CREDS secret is empty or not set."
+            exit 1
+          fi
 
       - name: Create credentials file
         run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" > credentials.json
