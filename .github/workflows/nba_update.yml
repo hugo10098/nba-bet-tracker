@@ -16,7 +16,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: pip install requests gspread pandas google-auth
+        run: pip install requests gspread pandas google-auth oauth2client
 
       - name: Create credentials file
         run: echo "${{ secrets.GOOGLE_SHEETS_CREDS }}" > credentials.json
