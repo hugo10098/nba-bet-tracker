@@ -9,9 +9,6 @@ from email.mime.text import MIMEText
 
 # Set up Google Sheets credentials
 creds_file = "credentials.json"
-with open(creds_file, "w") as f:
-    f.write(os.environ["GOOGLE_SHEETS_CREDS"])
-
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name(creds_file, scope)
 client = gspread.authorize(creds)
